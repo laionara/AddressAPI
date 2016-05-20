@@ -9,6 +9,10 @@ public class Response {
 	private Address address;
 	private String error;
 	
+	public Response(){
+		
+	}
+	
 	public Address getAddress() {
 		return address;
 	}

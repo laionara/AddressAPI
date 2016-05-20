@@ -28,7 +28,7 @@ public class AddressService {
 		return response;
 	}
 	
-	private Address findAddress(String cep) {
+	public Address findAddress(String cep) {
 		String cepWithZeros = String.format("%1$-8s", cep).replace(' ', '0');
 		if(cepWithZeros.equals("00000000"))
 			return null;
@@ -39,7 +39,7 @@ public class AddressService {
 	}
 	
 	public String clearCep(String cep) {
-		if (cep != null) {
+		if (cep != "") {
 		  cep = cep.replaceAll("[^\\d]", "");
 		} 
 		return cep;
