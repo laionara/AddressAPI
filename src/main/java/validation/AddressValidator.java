@@ -15,13 +15,11 @@ public class AddressValidator implements Validator {
 	}
 
 	public void validate(Object target, Errors errors) {
-		String cep = (String) target;
-		cep = this.onlyNumbers(cep);
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "NotEmpty.address.cep");
-		if(cep.length() != 7){
-			
-		}
-		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "rua", "Campo obrigatório");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "numero", "Campo obrigatório");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cep", "Campo obrigatório");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cidade", "Campo obrigatório");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "estado", "Campo obrigatório");
 	}
 	
 	public String onlyNumbers(String str) {

@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Scope;
+
 @Entity
 @Table(name="address")
 public class Address implements Serializable {
@@ -36,11 +38,20 @@ public class Address implements Serializable {
 	@Column
 	private String estado;
 	
+	@Column
+	private Integer numero;
+	
+	@Column
+	private String complemento;
+	
+	
 	public Address() {
 		
 	}
 	
-	public Address(Long id, String cep, String rua, String bairro, String cidade, String estado) {
+	
+	public Address(Long id, String cep, String rua, String bairro, String cidade, String estado, Integer numero,
+			String complemento) {
 		super();
 		this.id = id;
 		this.cep = cep;
@@ -48,7 +59,10 @@ public class Address implements Serializable {
 		this.bairro = bairro;
 		this.cidade = cidade;
 		this.estado = estado;
+		this.numero = numero;
+		this.complemento = complemento;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -97,6 +111,27 @@ public class Address implements Serializable {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
+
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
+
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+	
 	
 	
 	

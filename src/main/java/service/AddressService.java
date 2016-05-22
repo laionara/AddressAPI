@@ -17,13 +17,16 @@ public class AddressService {
 		Response response = new Response();
 		cep = this.clearCep(cep);
 		if(cep.length() != 8){
-			response.setError("CEP Inválido");
+			response.setMessage("CEP inválido");
 		}else{
 			Address address = this.findAddress(cep);
 			if(address == null){
-				response.setError("CEP Não Encontrado");
+				response.setMessage("CEP não cadastrado");
+				response.setNewAddress(true);
+			}else{
+				response.setAddress(address);
+				response.setMessage("CEP já cadastrado");
 			}
-			response.setAddress(address);
 		}
 		return response;
 	}
@@ -44,5 +47,23 @@ public class AddressService {
 		} 
 		return cep;
 	}
+	
+	public Response save(Address address, Response response){
+		Address newAddress = new Address();
+		//Include
+		newAddress = addressDao.save(address);
+		response.setAddress(newAddress);
+		response.setMessage("Endereço cadastrado com sucesso");
+		return response;
+	}
+	
+	public Response update(Address address, Response response){
+		address.setId(response.getAddress().getId());
+		response.setAddress(address);
+		addressDao.update(address);
+		response.setMessage("Endereço atualizado com sucesso");
+		return response;
+	}
+	
 	
 }

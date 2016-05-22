@@ -15,8 +15,14 @@ public class AddressDAO {
 	@PersistenceContext
 	private EntityManager manager;
 	
-	public void save(Address address){
+	public Address save(Address address){
 		manager.persist(address);
+		return address;
+	}
+	
+	public Address update(Address address){
+		manager.merge(address);
+		return address;
 	}
 	
 	public Address findByCEP(String cep){
