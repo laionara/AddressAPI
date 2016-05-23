@@ -1,7 +1,7 @@
 /**
  * 
  */
-package config;
+package com.github.addressapi.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -10,12 +10,11 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.github.addressapi.controller.AddressController;
+import com.github.addressapi.dao.AddressDAO;
+import com.github.addressapi.service.AddressService;
+import com.github.addressapi.validation.AddressValidator;
 import com.mysql.cj.fabric.Response;
-
-import controller.AddressController;
-import dao.AddressDAO;
-import service.AddressService;
-import validation.AddressValidator;
 
 /**
  * @author layonara

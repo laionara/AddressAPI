@@ -1,4 +1,4 @@
-package model;
+package com.github.addressapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

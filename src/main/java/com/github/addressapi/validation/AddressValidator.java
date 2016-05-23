@@ -1,11 +1,11 @@
-package validation;
+package com.github.addressapi.validation;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Component; 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import model.Address;
+import com.github.addressapi.model.Address;
 
 @Component
 public class AddressValidator implements Validator {

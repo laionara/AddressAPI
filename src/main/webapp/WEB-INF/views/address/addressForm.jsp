@@ -16,7 +16,6 @@
 <title>Insert title here</title>
 <script type="text/javascript" charset="utf-8">
 	function findByCep() {
-		alert("cheguei");
 		var cep = $("#cep").val();
 		$.ajax({
 			 type: "get",

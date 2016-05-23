@@ -1,13 +1,13 @@
-package service;
+package com.github.addressapi.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dao.AddressDAO;
-import model.Address;
-import model.Response;
+import com.github.addressapi.dao.AddressDAO;
+import com.github.addressapi.model.Address;
+import com.github.addressapi.model.Response;
 
 @Service
 public class AddressService {

@@ -1,4 +1,4 @@
-package test;
+package com.github.addressapi.test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,9 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import dao.AddressDAO;
-import model.Address;
-import service.AddressService;
+import com.github.addressapi.dao.AddressDAO;
+import com.github.addressapi.model.Address;
+import com.github.addressapi.service.AddressService;
 
 public class AddressServiceTest {
 
@@ -28,7 +28,7 @@ public class AddressServiceTest {
 	}
 	
 	@Test
-	public void testClearCepNull(){
+	public void clearCepNullTest(){
 		//Arrange
 		String cep="";
 		//Act
@@ -38,7 +38,7 @@ public class AddressServiceTest {
 	}
 	
 	@Test
-	public void testClearCepNotNull(){
+	public void clearCepNotNullTest(){
 		//Arrange
 		
 		String cep="12345678";
@@ -49,7 +49,7 @@ public class AddressServiceTest {
 	}
 	
 	@Test
-	public void testfindAddressZeros(){
+	public void findAddressZerosTest(){
 		//Arrange
 		String cep="00000000";
 		this.address.setCep(cep);

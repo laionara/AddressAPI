@@ -1,4 +1,4 @@
-package model;
+package com.github.addressapi.model;
 
 import java.io.Serializable; 
 
@@ -48,7 +48,6 @@ public class Address implements Serializable {
 	private String estado;
 	
 	@Column
-	@NotBlank
 	private Integer numero;
 	
 	@Column(length=50)

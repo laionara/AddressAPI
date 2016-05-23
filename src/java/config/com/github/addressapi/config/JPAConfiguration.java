@@ -1,4 +1,4 @@
-package config;
+package com.github.addressapi.config;
 
 import java.util.Properties;
 
@@ -26,7 +26,7 @@ public class JPAConfiguration {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
-		em.setPackagesToScan(new String[] {"model"});
+		em.setPackagesToScan(new String[] {"com.github.addressapi.model"});
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
 		em.setJpaProperties(additionalProperties());

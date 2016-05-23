@@ -1,6 +1,6 @@
-package dao;
+package com.github.addressapi.dao;
 
-import java.util.List;
+import java.util.List;  
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -9,7 +9,8 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import model.Address;
+import com.github.addressapi.model.Address;
+
 
 @Repository
 public class AddressDAO {

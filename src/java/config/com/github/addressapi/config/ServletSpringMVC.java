@@ -1,7 +1,7 @@
 /** 
  * 
  */
-package config;
+package com.github.addressapi.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

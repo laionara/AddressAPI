@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.github.addressapi.model.*" %>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@page import="com.github.addressapi.model.Address" %>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%><html>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@page import="com.github.addressapi.model.*" %>
-
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,17 +18,15 @@
 <script type="text/javascript" charset="utf-8">
 	
 	function deleteById(id) {
-		alert("cheguei");
-		alert(id);
 		$.ajax({
 			type: "delete",
 			 url: "http://localhost:8080/desafio-java/address/delete/" + id,
 			 cache: false,    
 			 success: function(response){
-				 
+				 alert(response);
 			 },
 			 error: function(){      
-			  alert('Erro de requisição');
+			  alert(response);
 			 }
 			});
 	}
@@ -44,7 +39,9 @@
 </head>
 <body>
 	<fieldset>
-		<%= request.getAttribute("message") %>
+		<% if(request.getAttribute("message") != null){%>
+			<h3><font color="red"><%= request.getAttribute("message") %></font></h3>
+		<%} %>
 		<table style="width: 900px">
 		  <tr>
 		    <td colspan="2"><h3>Endereço</h3></td>
@@ -79,6 +76,5 @@
 				<% } %>
 		</table>
 	</fieldset>		
-	<br>
 </body>
 </html>
