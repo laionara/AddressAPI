@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class JPAConfiguration {
 
 	public JPAConfiguration() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Bean

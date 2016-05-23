@@ -34,6 +34,9 @@ public class AddressService {
 		return response;
 	}
 	
+	/**
+	 * Substitui o último digito do cep por zero até que o mesmo seja encontrado no banco ou que todos os digitos sejam zero  
+	 */
 	public Address findAddress(String cep) {
 		String cepWithZeros = String.format("%1$-8s", cep).replace(' ', '0');
 		if(cepWithZeros.equals("00000000"))
