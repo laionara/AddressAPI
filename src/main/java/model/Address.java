@@ -8,7 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.context.annotation.Scope;
 
 @Entity
@@ -23,32 +27,37 @@ public class Address implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
+	@Column(length=8)
+	@NotNull
+	@NotBlank
 	private String cep;
 	
-	@Column
+	@Column(length=30)
+	@NotBlank
 	private String rua;
 	
-	@Column
+	@Column(length=30)
 	private String bairro;
 	
-	@Column
+	@Column(length=30)
+	@NotBlank
 	private String cidade;
 	
-	@Column
+	@Column(length=30)
+	@NotBlank
 	private String estado;
 	
 	@Column
+	@NotBlank
 	private Integer numero;
 	
-	@Column
+	@Column(length=50)
 	private String complemento;
 	
 	
 	public Address() {
 		
 	}
-	
 	
 	public Address(Long id, String cep, String rua, String bairro, String cidade, String estado, Integer numero,
 			String complemento) {
@@ -62,7 +71,6 @@ public class Address implements Serializable {
 		this.numero = numero;
 		this.complemento = complemento;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -112,6 +120,15 @@ public class Address implements Serializable {
 		this.cidade = cidade;
 	}
 
+	public String getComplemento() {
+		return complemento;
+	}
+
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
 
 	public Integer getNumero() {
 		return numero;
@@ -121,16 +138,7 @@ public class Address implements Serializable {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
-
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
+	
 	
 	
 	

@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -36,5 +38,24 @@ public class AddressDAO {
 		}
 	}
 	
+	public List<Address> findAll(){
+		Query q = manager.createQuery("SELECT a FROM Address a ");
+		return q.getResultList();
+	}
+
+	public void delete(Address address) {
+		manager.remove(address);
+	}
+
+	public Address findById(Long id) {
+		try {
+			Query q = manager.createQuery("SELECT a FROM Address a where a.id = :id");
+			q.setParameter("id", id);
+			Address address = (Address) q.getSingleResult();
+			return address;
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 	
 }

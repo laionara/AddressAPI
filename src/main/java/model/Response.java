@@ -5,11 +5,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
-@JsonIgnoreProperties( { "newAddress" })
+@JsonIgnoreProperties( { "newAddress" , "validCep" } )
 public class Response {
 
 	private Address address;
 	private boolean isNewAddress;
+	private boolean isValidCep;
 	private String message;
 	
 	public Response(){
@@ -39,6 +40,13 @@ public class Response {
 		this.isNewAddress = isNewAddress;
 	}
 
+	public boolean isValidCep() {
+		return isValidCep;
+	}
+
+	public void setValidCep(boolean isValidCep) {
+		this.isValidCep = isValidCep;
+	}
 	
 
 		

@@ -1,9 +1,15 @@
 package controller;
 
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,15 +29,13 @@ public class AddressController {
 	@Autowired
 	private AddressService addressService;
 	
-	private Response response;
-	
 	public AddressController(){
 	}
 	
 	@RequestMapping(value = "/{cep}", method = RequestMethod.GET, produces={"application/json; charset=UTF-8"})
 	public @ResponseBody Response getAddressInJSON(@PathVariable("cep") String cep) {
-		this.response = addressService.findByCep(cep);
-		return this.response;
+		return addressService.findByCep(cep);
+		
 	}
 	
 	@RequestMapping(value = "/form", method = RequestMethod.GET)
@@ -40,31 +44,40 @@ public class AddressController {
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(Address address, RedirectAttributes redirect) {
-		Response response = addressService.findByCep(address.getCep()) ;
-		if(this.response.isNewAddress()){
-			response = this.addressService.save(address, this.response);
+	public String save(@Valid Address address, BindingResult result, RedirectAttributes redirect) {
+		Response response = new Response();
+		if(result.hasErrors()){
+			response.setMessage("Erro: campo obrigatório");
+			redirect.addFlashAttribute("message", response.getMessage());
+			return "redirect:/address/form";
+		}
+		response = addressService.findByCep(address.getCep());
+		if(response.isValidCep()){
+			response = this.addressService.saveRegister(address, response);
 		}else{
-			response = this.addressService.update(address, this.response);
+			redirect.addFlashAttribute("message", response.getMessage());
+			return "redirect:/address/form";
 		}
 		
 		redirect.addFlashAttribute("response", response);
 		return "redirect:/address/list";
 	}
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = {RequestMethod.GET, RequestMethod.DELETE})
 	public ModelAndView list(Response response) {
+		List<Address> addressList = this.addressService.findAll();
 		ModelAndView model = new ModelAndView("address/addressList");
+		model.addObject("addressList", addressList);
 		model.addObject("message", response.getMessage());
+		
 		return model;
 	}
-
-	public Response getResponse() {
-		return response;
+	
+	@RequestMapping(value = "/delete/{id}", method = {RequestMethod.GET, RequestMethod.DELETE})
+	public String delete(@PathVariable("id") Long id, RedirectAttributes redirect) {
+		Response response = this.addressService.deleteAddress(id);
+		redirect.addFlashAttribute("response", response);
+		return "redirect:/address/list";
 	}
-
-	public void setResponse(Response response) {
-		this.response = response;
-	}
-
+	
 }

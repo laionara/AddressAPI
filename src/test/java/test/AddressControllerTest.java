@@ -40,7 +40,7 @@ public class AddressControllerTest {
 	    when(adService.findByCep(CEP)).thenReturn(result);
 	    // Act
 	    //addressController.getAddressInJSON(CEP);
-	    // Arrange
+	    //test
 	    assertEquals("", result, result);
 	    
 	}

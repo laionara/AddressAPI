@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,6 +16,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" charset="utf-8">
 	function findByCep() {
+		alert("cheguei");
 		var cep = $("#cep").val();
 		$.ajax({
 			 type: "get",
@@ -29,22 +31,6 @@
 			});
 	}
 	
-	function save() {
-		alert("antes")
-		$.ajax({
-			 type: "post",
-			 url: "localhost:8080/desafio-java/address/save",
-			 cache: false,    
-			 success: function(address){
-				alert("cheguei");
-				display(address);
-			 },
-			 error: function(){      
-			  alert('Erro de requisição');
-			 }
-			});
-	}		
-	
 	function display(data){
 		var name = JSON.stringify(data) ;
 		alert(name)
@@ -54,8 +40,12 @@
 </head>
 <body>
 	
-	<form:form method="post" modelAttribute="address" action="/desafio-java/address/save">
+	<form:form method="post" modelAttribute="address" commandName="address" action="/desafio-java/address/save">
 		<fieldset>
+		<% if(request.getAttribute("message") != null){%>
+			<h2><font color="red"><center><%= request.getAttribute("message") %></center></font></h2>
+		<%} %>
+		
 		<table>
 		  <tr>
 		    <td colspan="2"><h3>Incluir Endereço</h3></td>
@@ -70,6 +60,7 @@
 		  <tr>
 		    <td>Cidade:</td>
 		    <td><input name="cidade" id="cidade"  type="text" /></td>
+		    <td><form:errors path="cidade"/></td>
 		  </tr>
 		  <tr>
 		  <tr>
@@ -83,6 +74,7 @@
 		  <tr>
 		    <td>Rua:</td>
 		    <td><input name="rua" id="rua" type="text" /></td>
+		    <td><form:errors path="rua"/></td>
 		  </tr>
 		  <tr>
 		    <td>Número:</td>

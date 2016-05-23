@@ -15,7 +15,7 @@ public class AddressValidator implements Validator {
 	}
 
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "rua", "Campo obrigatório");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "rua", "NotBlank.java.lang.String");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "numero", "Campo obrigatório");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cep", "Campo obrigatório");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cidade", "Campo obrigatório");

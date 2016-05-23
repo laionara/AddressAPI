@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ public class AddressService {
 		if(cep.length() != 8){
 			response.setMessage("CEP inválido");
 		}else{
+			response.setValidCep(true);
 			Address address = this.findAddress(cep);
 			if(address == null){
 				response.setMessage("CEP não cadastrado");
@@ -47,8 +50,17 @@ public class AddressService {
 		} 
 		return cep;
 	}
+	public Response saveRegister(Address address, Response response){
+		if(response.isNewAddress()){
+			response = this.save(address, response);
+		}else{
+			response = this.update(address, response);
+		}
+		return response;
+	}
 	
 	public Response save(Address address, Response response){
+		
 		Address newAddress = new Address();
 		//Include
 		newAddress = addressDao.save(address);
@@ -62,6 +74,25 @@ public class AddressService {
 		response.setAddress(address);
 		addressDao.update(address);
 		response.setMessage("Endereço atualizado com sucesso");
+		return response;
+	}
+
+	public List<Address> findAll() {
+		return this.addressDao.findAll();
+	}
+	
+	public Address findById(Long id) {
+		return this.addressDao.findById(id);
+	}
+
+	public Response deleteAddress(Long id) {
+		Address address = this.findById(id);
+		Response response = new Response();
+		if(address != null){
+			this.addressDao.delete(address);
+			response.setMessage("Registro removido com sucesso");
+			
+		}
 		return response;
 	}
 	
