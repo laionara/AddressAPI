@@ -3,7 +3,7 @@ Para a resolução das questões 01 e 02 foi criado o projeto AddressAPI. Esse p
 - Framework Spring MVC versão 4.2.6
 - Hibernate versão 5.1.0
 - JUnit versão 4.11
-- Mockit versão 1.10.19
+- Mockito versão 1.10.19
 - Tomcat versão 7.0.30
 - Banco de dados Postgres versão 9.4
 - Maven versão 4.0
