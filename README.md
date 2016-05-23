@@ -25,3 +25,17 @@ Resolução da questão 01:
  - Se não existir endereço cadastrado para o cep enviado, o último caracter é substituido por zero de maneira recursiva até que um endereço seja encontrado ou todos os caracteres sejam zero.
  - O resultado dessa requisição é incluído na variável address da classe JSON Response, assim como uma mensagem indicando se o endereço é inválido, ou se já existe no banco de dados.
  - O retorno do JSON é exibido no corpo da página. 
+ 
+Resolução da questão 02:
+ - O usuário pode consultar, atualizar ou cadastrar o endereço através da página JSP AddressForm. 
+ - O primeiro campo a ser preenchido é o campo "CEP", e após o preenchimento é disparado o evento Ajax onBlur que invoca o método getAddressInJSON(String cep) e retorna um alerta para a tela informando a situação do cep enviado(inválido, cadastrado ou não cadastrado)
+ - Ao clicar em enviar é chamado o método save(@Valid Address address, BindingResult result, RedirectAttributes redirect) que recebe como parâmetro o objeto Address preenchido pelo usuário. A notação @Valid indica que esse objeto é validado pelo método validate() da classe AddressValidator que implementa a interface Validator do Spring.
+ - Em caso de erro, indicado pelo parâmetro result, retorna-se (usando o parametro redirect) para a página AddressForm.jsp com a mensagem de erro. Caso contrário, verifica-se se o cep é válido utilizando a função findByCep(String cep). 
+ - Caso o cep seja inválido retorna-se (usando o parametro redirect) para a página AddressForm.jsp com a mensagem de "CEP inválido"
+ - Se o cep for válido, o mesmo é eviado como pârametro para ser incluido ou atualizado no banco de dados. 
+ - Em seguida, o método list(Response response) é invocado para atualizar a lista com todos os endereços cadastrados, adicionar uma mensagem referente a inclusão ou atualização do endereço e redirecionar o usuário para a página AddressConsult.jsp.
+ - Na tela de visualização de endereço é possível deletar um registro. Caso o usuário clique no botão "Deletar" o evento onClick do Ajax é disparado para invocar o método delete(Response response) do AddressController enviando o id do endereço selecionado na tabela de endereços.
+ - O Id é utilizado como parâmetro para o método findById que retorna o objeto Address que deve ser deletado do banco pelo método delete(Address address) da classe AddressDAO.
+ - Após deletar o registro uma mensagem é enviada, via classe JSON Response, para a página AddressConsult.jsp.
+  
+ 
